@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 60rem;
+  border: 1px solid red;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  padding: 1rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  text-transform: uppercase;
+  padding: 1rem 2.3rem;
+  cursor: pointer;
+  border: none;
+  outline: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-primary {
+  background-color: #0000ff;
+  color: #fff;
+}
+
+.btn-dark {
+  background-color: rgb(13, 14, 13);
+  color: #fff;
+}
+
+.Task-list {
+  padding: 0;
+}
+
+.task-list-item {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  margin: 1rem 0;
+}
