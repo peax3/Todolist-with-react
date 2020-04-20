@@ -46,12 +46,22 @@ ul {
   color: #fff;
 }
 
-.Task-list {
-  padding: 0;
+.list-container {
+  border: 1px solid blue;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
 }
 
 .task-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.8rem 1rem;
   border: 1px solid #ccc;
   margin: 1rem 0;
+}
+
+.delete {
+  color: red;
 }
