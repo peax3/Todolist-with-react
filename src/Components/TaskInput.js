@@ -5,28 +5,36 @@ class TaskInput extends Component {
     query: "",
   };
 
-  updateQuery = (event) => {
+  updateQuery = async (query) => {
+    await this.setState({
+      query: query,
+    });
+
+    console.log(this.state.query);
+  };
+
+  clearQuery = () => {
     this.setState({
-      query: event.target.value,
+      query: "",
     });
   };
 
   render() {
+    const { query } = this.state;
+    const { onAddTask } = this.props;
     return (
       <div>
         <input
           type="text"
           className="task-input"
-          value={this.state.query}
-          onChange={this.updateQuery}
+          onChange={(event) => this.updateQuery(event.target.value)}
+          value={query}
         />
         <button
           className="btn btn-primary"
           onClick={() => {
-            this.props.onAddTask(this.state.query);
-            this.setState({
-              query: "",
-            });
+            onAddTask(query);
+            this.clearQuery();
           }}
         >
           add task

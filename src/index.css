@@ -65,3 +65,7 @@ ul {
 .delete {
   color: red;
 }
+
+.delete:hover {
+  color: rgb(127, 3, 3);
+}
