@@ -10,7 +10,7 @@ class TaskInput extends Component {
       query: query,
     });
 
-    console.log(this.state.query);
+    // console.log(this.state.query);
   };
 
   clearQuery = () => {

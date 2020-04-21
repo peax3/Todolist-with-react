@@ -62,6 +62,10 @@ ul {
   margin: 1rem 0;
 }
 
+.show-tasks {
+  text-align: center;
+}
+
 .delete {
   color: red;
 }
