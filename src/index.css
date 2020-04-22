@@ -41,6 +41,10 @@ ul {
   color: #fff;
 }
 
+.btn-primary:hover {
+  background-color: #0202c9;
+}
+
 .btn-dark {
   background-color: rgb(13, 14, 13);
   color: #fff;
@@ -64,6 +68,17 @@ ul {
 
 .show-tasks {
   text-align: center;
+}
+
+.show-tasks button {
+  border: none;
+  background: none;
+  color: #0000ff;
+  font-size: 1rem;
+}
+
+.show-tasks button:hover {
+  color: #0202c9;
 }
 
 .delete {

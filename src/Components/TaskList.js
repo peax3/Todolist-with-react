@@ -10,7 +10,9 @@ class TaskList extends Component {
     await this.setState((state) => ({ searchInput: input }));
   };
 
-  clearSearchInput = () => {};
+  clearSearchInput = () => {
+    this.setState({ searchInput: "" });
+  };
 
   render() {
     const { tasks, onRemoveTask } = this.props;
@@ -43,9 +45,10 @@ class TaskList extends Component {
         {/* if the user is filtering through the task display this */}
         {showTasks.length !== tasks.length ? (
           <div className="show-tasks">
-            <p>
+            <span>
               showing {showTasks.length} from {tasks.length} total
-            </p>
+            </span>
+            <button onClick={this.clearSearchInput}>show all</button>
           </div>
         ) : (
           false
