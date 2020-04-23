@@ -6,8 +6,8 @@ class TaskList extends Component {
     searchInput: "",
   };
 
-  updateSearchInput = async (input) => {
-    await this.setState((state) => ({ searchInput: input }));
+  updateSearchInput = (input) => {
+    this.setState((state) => ({ searchInput: input }));
   };
 
   clearSearchInput = () => {

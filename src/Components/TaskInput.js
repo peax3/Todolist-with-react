@@ -5,12 +5,10 @@ class TaskInput extends Component {
     query: "",
   };
 
-  updateQuery = async (query) => {
-    await this.setState({
+  updateQuery = (query) => {
+    this.setState({
       query: query,
     });
-
-    // console.log(this.state.query);
   };
 
   clearQuery = () => {
