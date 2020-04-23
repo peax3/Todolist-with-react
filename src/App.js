@@ -8,13 +8,17 @@ class App extends Component {
     taskLists: JSON.parse(localStorage.getItem("taskLists")) || [],
   };
 
+  // to persist data in local storage
+  updateLocalStorage = (key, values) => {
+    localStorage.setItem(key, JSON.stringify(values));
+  };
+
   addTask = async (task) => {
     await this.setState((state) => ({
-      taskLists: [...state.taskLists, { body: task }],
+      taskLists: [...state.taskLists, { body: task, completed: false }],
     }));
 
-    // update the lists in local storage
-    localStorage.setItem("taskLists", JSON.stringify(this.state.taskLists));
+    this.updateLocalStorage("taskLists", this.state.taskLists);
   };
 
   removeTask = async (task, indexToRemove) => {
@@ -23,8 +27,29 @@ class App extends Component {
       taskLists: state.taskLists.filter((t, index) => index !== indexToRemove),
     }));
 
+    this.updateLocalStorage("taskLists", this.state.taskLists);
+  };
+
+  handleCompletedStatus = async (task, index, tasks) => {
+    // create deep copy of the tasks array
+    const tasksCopy = JSON.parse(JSON.stringify(tasks));
+    const flag = task.completed;
+
+    if (flag) {
+      // change to true
+      tasksCopy[index].completed = !flag;
+    } else {
+      // change to false
+      tasksCopy[index].completed = !flag;
+    }
+
+    // set the state to the updated array
+    await this.setState((state) => ({
+      taskLists: JSON.parse(JSON.stringify(tasksCopy)),
+    }));
+
     // update in local storage
-    localStorage.setItem("taskLists", JSON.stringify(this.state.taskLists));
+    this.updateLocalStorage("taskLists", this.state.taskLists);
   };
 
   render() {
@@ -32,7 +57,11 @@ class App extends Component {
     return (
       <div className="container">
         <TaskInput onAddTask={this.addTask} />
-        <TaskList tasks={this.state.taskLists} onRemoveTask={this.removeTask} />
+        <TaskList
+          tasks={this.state.taskLists}
+          onRemoveTask={this.removeTask}
+          onHandleCompletedStatus={this.handleCompletedStatus}
+        />
       </div>
     );
   }

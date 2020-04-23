@@ -15,7 +15,7 @@ class TaskList extends Component {
   };
 
   render() {
-    const { tasks, onRemoveTask } = this.props;
+    const { tasks, onRemoveTask, onHandleCompletedStatus } = this.props;
     const { searchInput } = this.state;
 
     let showTasks;
@@ -27,7 +27,7 @@ class TaskList extends Component {
       showTasks = tasks.filter((task) => searchInputExp.test(task.body));
     } else {
       // if there is nothing in the search input show all tasks
-      showTasks = tasks;
+      showTasks = [...tasks];
     }
 
     return (
@@ -57,7 +57,14 @@ class TaskList extends Component {
         <ul className="task-list">
           {showTasks.map((task, index) => (
             <li className="task-list-item" key={index}>
-              {task.body}
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => onHandleCompletedStatus(task, index, showTasks)}
+              />
+              <span className={task.completed ? "completed" : null}>
+                {task.body}
+              </span>
               <span
                 className="delete"
                 onClick={() => onRemoveTask(task, index)}

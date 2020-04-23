@@ -15,7 +15,7 @@ body {
   margin: 0 auto;
 }
 
-input {
+input[type="text"] {
   display: block;
   padding: 1rem 1rem;
   width: 100%;
@@ -64,6 +64,10 @@ ul {
   padding: 0.8rem 1rem;
   border: 1px solid #ccc;
   margin: 1rem 0;
+}
+
+.task-list-item .completed {
+  text-decoration: line-through;
 }
 
 .show-tasks {
