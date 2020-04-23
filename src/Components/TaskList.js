@@ -15,7 +15,14 @@ class TaskList extends Component {
   };
 
   render() {
-    const { tasks, onRemoveTask, onHandleCompletedStatus } = this.props;
+    const {
+      tasks,
+      onRemoveTask,
+      onHandleCompletedStatus,
+      onClearAll,
+      onClearCompleted,
+    } = this.props;
+
     const { searchInput } = this.state;
 
     let showTasks;
@@ -74,6 +81,15 @@ class TaskList extends Component {
             </li>
           ))}
         </ul>
+
+        <div className="clear-buttons">
+          <button className="btn btn-light" onClick={onClearCompleted}>
+            clear completed
+          </button>
+          <button className="btn btn-dark" onClick={onClearAll}>
+            clear all
+          </button>
+        </div>
       </div>
     );
   }

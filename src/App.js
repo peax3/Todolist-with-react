@@ -52,6 +52,27 @@ class App extends Component {
     this.updateLocalStorage("taskLists", this.state.taskLists);
   };
 
+  clearCompleted = async () => {
+    const tasksCopy = JSON.parse(JSON.stringify(this.state.taskLists));
+    const unCompletedTasks = tasksCopy.filter(
+      (task) => task.completed === false
+    );
+    // set the state to the updated array
+    await this.setState((state) => ({
+      taskLists: JSON.parse(JSON.stringify(unCompletedTasks)),
+    }));
+    // update in local storage
+    this.updateLocalStorage("taskLists", this.state.taskLists);
+  };
+
+  clearAll = async () => {
+    await this.setState({
+      taskLists: [],
+    });
+
+    this.updateLocalStorage("taskLists", this.state.taskLists);
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -61,6 +82,8 @@ class App extends Component {
           tasks={this.state.taskLists}
           onRemoveTask={this.removeTask}
           onHandleCompletedStatus={this.handleCompletedStatus}
+          onClearAll={this.clearAll}
+          onClearCompleted={this.clearCompleted}
         />
       </div>
     );

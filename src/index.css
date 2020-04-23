@@ -50,6 +50,19 @@ ul {
   color: #fff;
 }
 
+.btn-dark:hover {
+  background-color: rgb(45, 47, 45);
+}
+
+.btn-light {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.btn-light:hover {
+  background-color: #dddada;
+}
+
 .list-container {
   border: 1px solid blue;
   margin-top: 3rem;
@@ -91,4 +104,9 @@ ul {
 
 .delete:hover {
   color: rgb(127, 3, 3);
+}
+
+.clear-buttons {
+  display: flex;
+  justify-content: space-between;
 }
