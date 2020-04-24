@@ -21,23 +21,21 @@ class TaskInput extends Component {
     const { query } = this.state;
     const { onAddTask } = this.props;
     return (
-      <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onAddTask(query);
+          this.clearQuery();
+        }}
+      >
         <input
           type="text"
           className="task-input"
           onChange={(event) => this.updateQuery(event.target.value)}
           value={query}
         />
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            onAddTask(query);
-            this.clearQuery();
-          }}
-        >
-          add task
-        </button>
-      </div>
+        <button className="btn btn-primary">add task</button>
+      </form>
     );
   }
 }

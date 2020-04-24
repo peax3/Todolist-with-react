@@ -70,6 +70,15 @@ class App extends Component {
           onClearAll={this.clearAll}
           onClearCompleted={this.clearCompleted}
         />
+
+        <div className="clear-buttons">
+          <button className="btn btn-light" onClick={this.clearCompleted}>
+            clear completed
+          </button>
+          <button className="btn btn-dark" onClick={this.clearAll}>
+            clear all
+          </button>
+        </div>
       </div>
     );
   }

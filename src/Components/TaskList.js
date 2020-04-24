@@ -1,5 +1,5 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from "react";
+import TasKListItem from "./TaskListItem";
 
 class TaskList extends Component {
   state = {
@@ -15,14 +15,7 @@ class TaskList extends Component {
   };
 
   render() {
-    const {
-      tasks,
-      onRemoveTask,
-      onHandleCompletedStatus,
-      onClearAll,
-      onClearCompleted,
-    } = this.props;
-
+    const { tasks } = this.props;
     const { searchInput } = this.state;
 
     let showTasks;
@@ -63,33 +56,16 @@ class TaskList extends Component {
 
         <ul className="task-list">
           {showTasks.map((task, index) => (
-            <li className="task-list-item" key={index}>
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={() => onHandleCompletedStatus(task, index, showTasks)}
-              />
-              <span className={task.completed ? "completed" : null}>
-                {task.body}
-              </span>
-              <span
-                className="delete"
-                onClick={() => onRemoveTask(task, index)}
-              >
-                <i className="fas fa-times-circle "></i>
-              </span>
-            </li>
+            <TasKListItem
+              key={index}
+              task={task}
+              index={index}
+              showTasks={showTasks}
+              onRemoveTask={this.props.onRemoveTask}
+              onHandleCompletedStatus={this.props.onHandleCompletedStatus}
+            />
           ))}
         </ul>
-
-        <div className="clear-buttons">
-          <button className="btn btn-light" onClick={onClearCompleted}>
-            clear completed
-          </button>
-          <button className="btn btn-dark" onClick={onClearAll}>
-            clear all
-          </button>
-        </div>
       </div>
     );
   }
