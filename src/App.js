@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import uniqid from "uniqid";
 import TaskInput from "./Components/TaskInput";
 import TaskList from "./Components/TaskList";
 
@@ -15,23 +16,27 @@ class App extends Component {
 
   addTask = (task) => {
     this.setState((state) => ({
-      taskLists: [...state.taskLists, { body: task, completed: false }],
+      taskLists: [
+        ...state.taskLists,
+        { id: uniqid(), body: task, completed: false },
+      ],
     }));
   };
 
-  removeTask = (task, indexToRemove) => {
+  removeTask = (id) => {
     // remove task
     this.setState((state) => ({
-      taskLists: state.taskLists.filter((t, index) => index !== indexToRemove),
+      taskLists: state.taskLists.filter((task) => task.id !== id),
     }));
   };
 
-  handleCompletedStatus = (task, index, tasks) => {
+  handleCompletedStatus = (task, id, tasks) => {
     // create deep copy of the tasks array
     const tasksCopy = JSON.parse(JSON.stringify(tasks));
     const flag = task.completed;
 
     // change the completed status of the task
+    const index = tasksCopy.findIndex((task) => task.id === id);
     tasksCopy[index].completed = !flag;
 
     // set the state to the updated array

@@ -57,9 +57,9 @@ class TaskList extends Component {
         <ul className="task-list">
           {showTasks.map((task, index) => (
             <TasKListItem
-              key={index}
+              key={task.id}
               task={task}
-              index={index}
+              id={task.id}
               showTasks={showTasks}
               onRemoveTask={this.props.onRemoveTask}
               onHandleCompletedStatus={this.props.onHandleCompletedStatus}

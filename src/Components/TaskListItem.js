@@ -2,7 +2,7 @@ import React from "react";
 
 function TaskListItem({
   task,
-  index,
+  id,
   onHandleCompletedStatus,
   showTasks,
   onRemoveTask,
@@ -12,10 +12,10 @@ function TaskListItem({
       <input
         type="checkbox"
         checked={task.completed}
-        onChange={() => onHandleCompletedStatus(task, index, showTasks)}
+        onChange={() => onHandleCompletedStatus(task, id, showTasks)}
       />
       <span className={task.completed ? "completed" : null}>{task.body}</span>
-      <span className="delete" onClick={() => onRemoveTask(task, index)}>
+      <span className="delete" onClick={() => onRemoveTask(id)}>
         <i className="fas fa-times-circle "></i>
       </span>
     </li>
