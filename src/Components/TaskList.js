@@ -59,8 +59,6 @@ class TaskList extends Component {
             <TasKListItem
               key={task.id}
               task={task}
-              id={task.id}
-              showTasks={showTasks}
               onRemoveTask={this.props.onRemoveTask}
               onHandleCompletedStatus={this.props.onHandleCompletedStatus}
             />

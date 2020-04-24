@@ -30,15 +30,14 @@ class App extends Component {
     }));
   };
 
-  handleCompletedStatus = (task, id, tasks) => {
+  handleCompletedStatus = (id) => {
     // create deep copy of the tasks array
-    const tasksCopy = JSON.parse(JSON.stringify(tasks));
-    const flag = task.completed;
-
-    // change the completed status of the task
+    const tasksCopy = JSON.parse(JSON.stringify(this.state.taskLists));
+    // get the index
     const index = tasksCopy.findIndex((task) => task.id === id);
+    const flag = tasksCopy[index].completed;
+    // change the completed status of the task
     tasksCopy[index].completed = !flag;
-
     // set the state to the updated array
     this.setState((state) => ({
       taskLists: JSON.parse(JSON.stringify(tasksCopy)),
@@ -72,8 +71,6 @@ class App extends Component {
           tasks={this.state.taskLists}
           onRemoveTask={this.removeTask}
           onHandleCompletedStatus={this.handleCompletedStatus}
-          onClearAll={this.clearAll}
-          onClearCompleted={this.clearCompleted}
         />
 
         <div className="clear-buttons">
