@@ -17,17 +17,21 @@ class TaskInput extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.query === "" || this.state.query.trim() === "") {
+      this.props.setAlert("Please enter something", "danger");
+    } else {
+      this.props.onAddTask(this.state.query);
+      this.props.setAlert("Task Added", "success");
+      this.clearQuery();
+    }
+  };
+
   render() {
     const { query } = this.state;
-    const { onAddTask } = this.props;
     return (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onAddTask(query);
-          this.clearQuery();
-        }}
-      >
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
           className="task-input"

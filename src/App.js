@@ -3,10 +3,12 @@ import { Component } from "react";
 import uniqid from "uniqid";
 import TaskInput from "./Components/TaskInput";
 import TaskList from "./Components/TaskList";
+import Alert from "./Components/Alert";
 
 class App extends Component {
   state = {
     taskLists: JSON.parse(localStorage.getItem("taskLists")) || [],
+    alert: null,
   };
 
   // to persist data in local storage
@@ -61,26 +63,28 @@ class App extends Component {
     });
   };
 
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg, type } });
+
+    setTimeout(() => {
+      this.setState({ alert: null });
+    }, 3000);
+  };
+
   render() {
     console.log(this.state);
     this.updateLocalStorage("taskLists", this.state.taskLists);
     return (
       <div className="container">
-        <TaskInput onAddTask={this.addTask} />
+        <Alert alert={this.state.alert} />
+        <TaskInput onAddTask={this.addTask} setAlert={this.setAlert} />
         <TaskList
           tasks={this.state.taskLists}
           onRemoveTask={this.removeTask}
           onHandleCompletedStatus={this.handleCompletedStatus}
+          onClearCompleted={this.clearCompleted}
+          onClearAll={this.clearAll}
         />
-
-        <div className="clear-buttons">
-          <button className="btn btn-light" onClick={this.clearCompleted}>
-            clear completed
-          </button>
-          <button className="btn btn-dark" onClick={this.clearAll}>
-            clear all
-          </button>
-        </div>
       </div>
     );
   }

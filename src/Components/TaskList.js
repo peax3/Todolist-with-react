@@ -4,18 +4,28 @@ import TasKListItem from "./TaskListItem";
 class TaskList extends Component {
   state = {
     searchInput: "",
+    viewActive: false,
+    viewCompleted: false,
   };
 
   updateSearchInput = (input) => {
-    this.setState((state) => ({ searchInput: input }));
+    this.setState({ searchInput: input });
   };
 
-  clearSearchInput = () => {
-    this.setState({ searchInput: "" });
+  showAll = () => {
+    this.setState({ searchInput: "", viewActive: false, viewCompleted: false });
+  };
+
+  showCompletedTasks = () => {
+    this.setState({ searchIput: "", viewCompleted: true, viewActive: false });
+  };
+
+  showActiveTasks = () => {
+    this.setState({ searchInput: "", viewActive: true, viewCompleted: false });
   };
 
   render() {
-    const { tasks } = this.props;
+    const { tasks, onClearCompleted, onClearAll } = this.props;
     const { searchInput } = this.state;
 
     let showTasks;
@@ -25,6 +35,11 @@ class TaskList extends Component {
       const searchInputExp = new RegExp(searchInput, "i");
       // collect tasks that match this pattern
       showTasks = tasks.filter((task) => searchInputExp.test(task.body));
+    } else if (this.state.viewCompleted) {
+      showTasks = tasks.filter((task) => task.completed);
+    } else if (this.state.viewActive) {
+      showTasks = tasks.filter((task) => !task.completed);
+      console.log("showTasks");
     } else {
       // if there is nothing in the search input show all tasks
       showTasks = [...tasks];
@@ -48,7 +63,7 @@ class TaskList extends Component {
             <span>
               showing {showTasks.length} from {tasks.length} total
             </span>
-            <button onClick={this.clearSearchInput}>show all</button>
+            <button onClick={this.showAll}>show all</button>
           </div>
         ) : (
           false
@@ -64,6 +79,24 @@ class TaskList extends Component {
             />
           ))}
         </ul>
+
+        <div className="clear-buttons">
+          <button className="btn btn-light" onClick={onClearCompleted}>
+            CLEAR COMPLETED
+          </button>
+          <button
+            onClick={() => {
+              console.log(showTasks);
+              this.showCompletedTasks(true);
+            }}
+          >
+            COMPLETED
+          </button>
+          <button onClick={this.showActiveTasks}>ACTIVE</button>
+          <button className="btn btn-dark" onClick={onClearAll}>
+            CLEAR ALL
+          </button>
+        </div>
       </div>
     );
   }
