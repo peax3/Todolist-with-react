@@ -80,26 +80,32 @@ class TaskList extends Component {
           ))}
         </ul>
 
-        <div className="clear-buttons">
-          <button className="btn btn-light" onClick={onClearCompleted}>
-            CLEAR COMPLETED
-          </button>
+        <div className="bottom-buttons">
+          <button onClick={onClearCompleted}>Clear Completed</button>
           <button
             onClick={() => {
               console.log(showTasks);
               this.showCompletedTasks(true);
             }}
+            style={this.state.viewCompleted ? buttonStyle : null}
           >
-            COMPLETED
+            Completed
           </button>
-          <button onClick={this.showActiveTasks}>ACTIVE</button>
-          <button className="btn btn-dark" onClick={onClearAll}>
-            CLEAR ALL
+          <button
+            onClick={this.showActiveTasks}
+            style={this.state.viewActive ? buttonStyle : null}
+          >
+            Active
           </button>
+          <button onClick={onClearAll}>Clear All</button>
         </div>
       </div>
     );
   }
 }
+
+const buttonStyle = {
+  border: "3px solid #26a69a",
+};
 
 export default TaskList;

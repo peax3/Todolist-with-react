@@ -76,15 +76,22 @@ class App extends Component {
     this.updateLocalStorage("taskLists", this.state.taskLists);
     return (
       <div className="container">
+        <div className="heading">TO-DO</div>
         <Alert alert={this.state.alert} />
         <TaskInput onAddTask={this.addTask} setAlert={this.setAlert} />
-        <TaskList
-          tasks={this.state.taskLists}
-          onRemoveTask={this.removeTask}
-          onHandleCompletedStatus={this.handleCompletedStatus}
-          onClearCompleted={this.clearCompleted}
-          onClearAll={this.clearAll}
-        />
+        {this.state.taskLists.length < 1 ? (
+          <div style={{ marginTop: "2rem", paddingLeft: "1.5rem" }}>
+            Nothing to do
+          </div>
+        ) : (
+          <TaskList
+            tasks={this.state.taskLists}
+            onRemoveTask={this.removeTask}
+            onHandleCompletedStatus={this.handleCompletedStatus}
+            onClearCompleted={this.clearCompleted}
+            onClearAll={this.clearAll}
+          />
+        )}
       </div>
     );
   }

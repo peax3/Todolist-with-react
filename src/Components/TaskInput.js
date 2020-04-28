@@ -20,6 +20,7 @@ class TaskInput extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.query === "" || this.state.query.trim() === "") {
+      this.setState({ query: "" });
       this.props.setAlert("Please enter something", "danger");
     } else {
       this.props.onAddTask(this.state.query);
@@ -31,14 +32,15 @@ class TaskInput extends Component {
   render() {
     const { query } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit}>
         <input
           type="text"
+          placeholder="New Task"
           className="task-input"
           onChange={(event) => this.updateQuery(event.target.value)}
           value={query}
         />
-        <button className="btn btn-primary">add task</button>
+        <button className="btn btn-add">Add Task</button>
       </form>
     );
   }
