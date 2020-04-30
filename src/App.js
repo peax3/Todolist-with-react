@@ -72,7 +72,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     this.updateLocalStorage("taskLists", this.state.taskLists);
     return (
       <div className="container">
